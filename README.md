@@ -10,7 +10,8 @@ These `.proto` files specify the structure of requests, responses, and data mode
 tercen_grpc_api/
 ├── tercen.proto          # Main service definitions
 ├── tercen_model.proto    # Data model definitions (assumed dependency)
-└── README.md             # This file
+├── README.md             # This file
+└── LICENSE               # Apache License Version 2.0
 ```
 
 ## Services
