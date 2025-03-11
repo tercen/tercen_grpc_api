@@ -124,6 +124,15 @@ To use this API:
 
 Refer to the `.proto` files for detailed message structures and service definitions.
 
+## Introduction to Tercen Studio for Local Development
+
+Tercen Studio, located at `https://github.com/tercen/tercen_studio`, is a development environment for the 
+Tercen platform. Tercen is a tool for data analysis and workflow management. Tercen Studio uses Docker to run locally 
+and works with the Tercen gRPC API, found at `https://github.com/tercen/tercen_grpc_api.git`. The API, defined
+in `.proto` files, offers services like `FileService`, `TaskService`, and `WorkflowService` to manage files,
+tasks, and workflows. You can set up Tercen Studio with Docker Compose and access it at `http://127.0.0.1:5402`.
+It provides a straightforward way to develop and test Tercen projects on your computer.
+
 ## License
 
 This repository is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
