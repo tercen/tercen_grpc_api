@@ -1,4 +1,4 @@
-// Copyright 2025 Tercen
+    // Copyright 2025 Tercen
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,6 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+    
+
 
 syntax = "proto3";
 
@@ -72,11 +74,19 @@ service FileService {
   rpc upload(stream ReqUpload ) returns ( RespUpload );
   rpc download( ReqDownload ) returns (stream RespDownload );
 }
+message ReqGetOrCreate {
+  string projectId = 1;
+  string path = 2;
+}
+message RespGetOrCreate {
+  EFolderDocument result = 1;
+}
 service FolderService {
   rpc create(EFolderDocument) returns (EFolderDocument);
   rpc get(GetRequest) returns (EFolderDocument);
   rpc update(EFolderDocument) returns (ResponseUpdate);
   rpc delete(DeleteRequest) returns (ResponseDelete);
+  rpc getOrCreate( ReqGetOrCreate ) returns ( RespGetOrCreate );
 }
 message ReqUploadTable {
   EFileDocument file = 1;
@@ -89,10 +99,17 @@ message ReqStreamTable {
   int64 limit = 4;
   string binaryFormat = 5;
 }
+message ReqGetFileMimetypeStream {
+  string tableId = 1;
+  string filename = 2;
+}
 message RespUploadTable {
   ESchema result = 1;
 }
 message RespStreamTable {
+  bytes result = 1;
+}
+message RespGetFileMimetypeStream {
   bytes result = 1;
 }
 service TableSchemaService {
@@ -102,6 +119,7 @@ service TableSchemaService {
   rpc delete(DeleteRequest) returns (ResponseDelete);
   rpc uploadTable(stream ReqUploadTable ) returns ( RespUploadTable );
   rpc streamTable( ReqStreamTable ) returns (stream RespStreamTable );
+  rpc getFileMimetypeStream( ReqGetFileMimetypeStream ) returns (stream RespGetFileMimetypeStream );
 }
 message ReqRunTask {
   string taskId = 1;
@@ -113,8 +131,10 @@ message ReqWaitDone {
   string taskId = 1;
 }
 message RespRunTask {
+  bytes result = 1;
 }
 message RespCancelTask {
+  bytes result = 1;
 }
 message RespWaitDone {
   ETask result = 1;
@@ -127,6 +147,35 @@ service TaskService {
   rpc runTask( ReqRunTask ) returns ( RespRunTask );
   rpc cancelTask( ReqCancelTask ) returns ( RespCancelTask );
   rpc waitDone( ReqWaitDone ) returns ( RespWaitDone );
+}
+message ReqSendChannel {
+  string channel = 1;
+  EEvent evt = 2;
+}
+message ReqChannel {
+  string name = 1;
+}
+message ReqListenTaskChannel {
+  string taskId = 1;
+  bool start = 2;
+}
+message RespSendChannel {
+  bytes result = 1;
+}
+message RespChannel {
+  EEvent result = 1;
+}
+message RespListenTaskChannel {
+  TaskEvent result = 1;
+}
+service EventService {
+  rpc create(EEvent) returns (EEvent);
+  rpc get(GetRequest) returns (EEvent);
+  rpc update(EEvent) returns (ResponseUpdate);
+  rpc delete(DeleteRequest) returns (ResponseDelete);
+  rpc sendChannel( ReqSendChannel ) returns ( RespSendChannel );
+  rpc channel( ReqChannel ) returns (stream RespChannel );
+  rpc listenTaskChannel( ReqListenTaskChannel ) returns (stream RespListenTaskChannel );
 }
 message ReqGetCubeQuery {
   string workflowId = 1;
@@ -190,6 +239,7 @@ message RespHasUserName {
   bool result = 1;
 }
 message RespUpdatePassword {
+  bytes result = 1;
 }
 message RespCreateToken {
   string result = 1;
@@ -247,7 +297,7 @@ message ReqGetLibrary {
   int64 limit = 6;
 }
 message RespGetLibrary {
-  bytes result = 1;
+  repeated EDocument list = 1;
 }
 service DocumentService {
   rpc create(EDocument) returns (EDocument);
@@ -255,4 +305,9 @@ service DocumentService {
   rpc update(EDocument) returns (ResponseUpdate);
   rpc delete(DeleteRequest) returns (ResponseDelete);
   rpc getLibrary( ReqGetLibrary ) returns ( RespGetLibrary );
+  rpc findKeyRange(KeyRangeRequest) returns (DocumentKeyRangeResponse);
+}
+message DocumentKeyRangeResponse {
+  repeated EDocument list = 1;
+  repeated IndexKeyValue next_keys = 2;
 }
