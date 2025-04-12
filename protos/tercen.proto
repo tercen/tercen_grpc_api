@@ -260,11 +260,19 @@ service UserService {
   rpc createToken( ReqCreateToken ) returns ( RespCreateToken );
   rpc getServerVersion( ReqGetServerVersion ) returns ( RespGetServerVersion );
 }
+message ReqCloneProjectDocument {
+  string documentId = 1;
+  string projectId = 2;
+}
+message RespCloneProjectDocument {
+  EProjectDocument result = 1;
+}
 service ProjectDocumentService {
   rpc create(EProjectDocument) returns (EProjectDocument);
   rpc get(GetRequest) returns (EProjectDocument);
   rpc update(EProjectDocument) returns (ResponseUpdate);
   rpc delete(DeleteRequest) returns (ResponseDelete);
+  rpc cloneProjectDocument( ReqCloneProjectDocument ) returns ( RespCloneProjectDocument );
   rpc findKeyRange(KeyRangeRequest) returns (ProjectDocumentKeyRangeResponse);
 }
 message ProjectDocumentKeyRangeResponse {
