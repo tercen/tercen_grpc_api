@@ -1,4 +1,4 @@
-// Copyright 2025 Tercen
+    // Copyright 2025 Tercen
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,6 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+    
+
 
 syntax = "proto3";
 
@@ -787,6 +789,7 @@ message DockerOperator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   string path = 59001;
   string container = 60001;
   Acl acl = 26003;
@@ -807,6 +810,7 @@ message DockerWebAppOperator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   string path = 59001;
   bool isViewOnly = 62001;
   string entryType = 62002;
@@ -1079,6 +1083,7 @@ message GitOperator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   string path = 59001;
   Acl acl = 26003;
   Date createdDate = 26004;
@@ -1395,6 +1400,7 @@ message Operator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   Acl acl = 26003;
   Date createdDate = 26004;
   Date lastModifiedDate = 26005;
@@ -1652,6 +1658,7 @@ message ROperator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   string path = 59001;
   Acl acl = 26003;
   Date createdDate = 26004;
@@ -1902,6 +1909,7 @@ message ShinyOperator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   string path = 59001;
   bool isViewOnly = 62001;
   string entryType = 62002;
@@ -2283,6 +2291,7 @@ message WebAppOperator {
   repeated string tags = 26007;
   string version = 26010;
   bool isPublic = 26011;
+  repeated string capabilities = 57003;
   string path = 59001;
   bool isViewOnly = 62001;
   string entryType = 62002;
