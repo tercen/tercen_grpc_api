@@ -166,7 +166,7 @@ message RespChannel {
   EEvent result = 1;
 }
 message RespListenTaskChannel {
-  TaskEvent result = 1;
+  ETaskEvent result = 1;
 }
 service EventService {
   rpc create(EEvent) returns (EEvent);

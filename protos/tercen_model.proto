@@ -349,6 +349,15 @@ message ETask {
     TestOperatorTask testoperatortask = 203;
   }
 }
+message ETaskEvent {
+  oneof object {
+    TaskDataEvent taskdataevent = 38;
+    TaskEvent taskevent = 36;
+    TaskLogEvent tasklogevent = 39;
+    TaskProgressEvent taskprogressevent = 40;
+    TaskStateEvent taskstateevent = 37;
+  }
+}
 message ETeam {
   oneof object {
     Team team = 223;
