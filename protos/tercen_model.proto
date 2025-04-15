@@ -875,6 +875,7 @@ message Event {
   bool isDeleted = 74001;
   string rev = 74002;
   Date date = 32001;
+  repeated Pair meta = 32002;
 }
 message ExportModel {
 }
@@ -1082,6 +1083,7 @@ message GenericEvent {
   string type = 35001;
   string content = 35002;
   Date date = 32001;
+  repeated Pair meta = 32002;
 }
 message GitOperator {
   string id = 53001;
@@ -1520,6 +1522,7 @@ message PatchRecords {
   string oK = 33005;
   int32 s = 33006;
   Date date = 32001;
+  repeated Pair meta = 32002;
   repeated PatchRecord rs = 33007;
 }
 message PendingState {
@@ -2104,6 +2107,7 @@ message TaskDataEvent {
   string taskId = 36001;
   bytes bytes = 38001;
   Date date = 32001;
+  repeated Pair meta = 32002;
 }
 message TaskEvent {
   string id = 53001;
@@ -2111,6 +2115,7 @@ message TaskEvent {
   string rev = 74002;
   string taskId = 36001;
   Date date = 32001;
+  repeated Pair meta = 32002;
 }
 message TaskLogEvent {
   string id = 53001;
@@ -2119,6 +2124,7 @@ message TaskLogEvent {
   string taskId = 36001;
   string message = 39001;
   Date date = 32001;
+  repeated Pair meta = 32002;
 }
 message TaskProgressEvent {
   string id = 53001;
@@ -2129,6 +2135,7 @@ message TaskProgressEvent {
   int32 total = 40002;
   int32 actual = 40003;
   Date date = 32001;
+  repeated Pair meta = 32002;
 }
 message TaskStateEvent {
   string id = 53001;
@@ -2136,6 +2143,7 @@ message TaskStateEvent {
   string rev = 74002;
   string taskId = 36001;
   Date date = 32001;
+  repeated Pair meta = 32002;
   EState state = 37001;
 }
 message TaskSummary {
