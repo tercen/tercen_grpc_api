@@ -148,6 +148,17 @@ service TaskService {
   rpc cancelTask( ReqCancelTask ) returns ( RespCancelTask );
   rpc waitDone( ReqWaitDone ) returns ( RespWaitDone );
 }
+service PatchRecordService {
+  rpc create(EPatchRecords) returns (EPatchRecords);
+  rpc get(GetRequest) returns (EPatchRecords);
+  rpc update(EPatchRecords) returns (ResponseUpdate);
+  rpc delete(DeleteRequest) returns (ResponseDelete);
+  rpc findKeyRange(KeyRangeRequest) returns (PatchRecordsKeyRangeResponse);
+}
+message PatchRecordsKeyRangeResponse {
+  repeated EPatchRecords list = 1;
+  repeated IndexKeyValue next_keys = 2;
+}
 message ReqSendChannel {
   string channel = 1;
   EEvent evt = 2;
