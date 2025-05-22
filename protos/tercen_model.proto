@@ -79,6 +79,7 @@ message EEvent {
     Event event = 32;
     GenericEvent genericevent = 35;
     PatchRecords patchrecords = 33;
+    PersistentChannelEvent persistentchannelevent = 241;
     TaskDataEvent taskdataevent = 38;
     TaskEvent taskevent = 36;
     TaskLogEvent tasklogevent = 39;
@@ -197,6 +198,7 @@ message EPersistentObject {
     Lock lock = 1887;
     Operator operator = 57;
     PatchRecords patchrecords = 33;
+    PersistentChannelEvent persistentchannelevent = 241;
     PersistentObject persistentobject = 74;
     Project project = 89;
     ProjectDocument projectdocument = 27;
@@ -1526,6 +1528,15 @@ message PatchRecords {
   repeated PatchRecord rs = 33007;
 }
 message PendingState {
+}
+message PersistentChannelEvent {
+  string id = 53001;
+  bool isDeleted = 74001;
+  string rev = 74002;
+  string channel = 241001;
+  Date date = 32001;
+  repeated Pair meta = 32002;
+  EEvent event = 241002;
 }
 message PersistentObject {
   string id = 53001;

@@ -159,6 +159,10 @@ message PatchRecordsKeyRangeResponse {
   repeated EPatchRecords list = 1;
   repeated IndexKeyValue next_keys = 2;
 }
+message ReqSendPersistentChannel {
+  string channel = 1;
+  EEvent evt = 2;
+}
 message ReqSendChannel {
   string channel = 1;
   EEvent evt = 2;
@@ -169,6 +173,9 @@ message ReqChannel {
 message ReqListenTaskChannel {
   string taskId = 1;
   bool start = 2;
+}
+message RespSendPersistentChannel {
+  bytes result = 1;
 }
 message RespSendChannel {
   bytes result = 1;
@@ -184,9 +191,15 @@ service EventService {
   rpc get(GetRequest) returns (EEvent);
   rpc update(EEvent) returns (ResponseUpdate);
   rpc delete(DeleteRequest) returns (ResponseDelete);
+  rpc sendPersistentChannel( ReqSendPersistentChannel ) returns ( RespSendPersistentChannel );
   rpc sendChannel( ReqSendChannel ) returns ( RespSendChannel );
   rpc channel( ReqChannel ) returns (stream RespChannel );
   rpc listenTaskChannel( ReqListenTaskChannel ) returns (stream RespListenTaskChannel );
+  rpc findKeyRange(KeyRangeRequest) returns (EventKeyRangeResponse);
+}
+message EventKeyRangeResponse {
+  repeated EEvent list = 1;
+  repeated IndexKeyValue next_keys = 2;
 }
 message ReqGetCubeQuery {
   string workflowId = 1;
